@@ -4,7 +4,7 @@ iris = RDatasets.dataset("datasets", "iris");
 y, X = unpack(iris, ==(:Species), colname -> true, rng=123);
 NeuralNetworkClassifier = @load NeuralNetworkClassifier
 
-clf = NeuralNetworkClassifier(acceleration=CUDALibs())
+clf = NeuralNetworkClassifier(epochs=20, acceleration=CUDALibs())
 
 import Random.seed!; seed!(123)
 mach = machine(clf, X, y)
