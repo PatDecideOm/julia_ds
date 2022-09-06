@@ -4,6 +4,7 @@ using DataFrames
 using MLJ
 using XGBoost
 using Plots
+using TimeSeries
 
 input_path = "C:\\data\\kaggle\\tabular-playground-series-sep-2022"
 
@@ -19,7 +20,22 @@ data_test = CSV.read(input_path * "\\test.csv", DataFrames.DataFrame);
 print(DataFrames.describe(data_train))
 print("\n")
 
-size_train = size(data_train, 1)
-print("nrows : ", size_train)
+belgium = subset(data_train, :country => ByRow(==("Belgium")))
 
-sold = data_train[!,"num_sold"]
+# plot(1:n, sold, ylabel="Sold (num.)", label="data", xlabel = "Time (days)")
+#         , xticks=0:365:n)
+
+print(DataFrames.describe(belgium))
+print("\n")
+
+n = size(belgium, 1)
+print("nrows : ", n)
+
+print("\n")
+print(levels(belgium.store))
+print("\n")
+print(levels(belgium.product))
+
+sold = belgium[!,"num_sold"]
+
+plot(1:n, sold, ylabel="Sold (num.)", label="Belgium", xlabel = "Time (days)")
