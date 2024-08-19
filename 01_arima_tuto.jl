@@ -17,6 +17,7 @@ println("Loading the dataset")
 df = CSV.read("C:\\data\\kaggle\\tabular-playground-series-sep-2022\\data_master_1.csv", DataFrames.DataFrame)
 df[!, :sp_500]
 
+println("plotting the dataset")
 s = df.sp_500
 plot(s)
 
@@ -26,9 +27,9 @@ s_train = s[1:floor(Int, train_percentage*length(s))]
 N = length(s_train)
 
 # Plot the training data
-plot(s_train)
+plot!(s_train)
 
-print(ADFTest(s_train, Symbol("constant"), 5))
+# print(ADFTest(s_train, Symbol("constant"), 5))
 
 s_diff = diff(s_train)
-plot(s_diff)
+plot!(s_diff)
